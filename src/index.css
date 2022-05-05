@@ -1,0 +1,17 @@
+* {
+  scrollbar-color: auto;
+  scrollbar-width: auto;
+  &::-webkit-scrollbar {
+    @apply h-1 w-1;
+  }
+  &::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  &::-webkit-scrollbar-thumb {
+    @apply rounded bg-slate-400 dark:bg-slate-300;
+  }
+}
+
+body {
+  @apply font-sans text-slate-800 dark:bg-slate-900 dark:text-white;
+}
