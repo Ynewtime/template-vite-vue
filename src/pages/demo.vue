@@ -1,8 +1,8 @@
 <template>
   <div class="min-h-screen auto-cols-fr auto-rows-fr grid select-none place-items-center">
-    <div :class="themeClass" @click="() => toggleDark()" />
-    <div class="cursor-pointer hover:text-xl" @click="toggleLocale">{{ t('hello', { name }) }}</div>
-    <div class="cursor-pointer heroicons-outline:arrow-left hover:(h-8 w-8)" @click="router.push('/')" />
+    <div class="cursor-pointer hover:(h-8 w-8)" :class="themeClass" @click="handleThemeChange" />
+    <div class="cursor-pointer hover:text-xl" @click="handleLocaleChange">{{ t('hello', { name }) }}</div>
+    <div class="cursor-pointer i-heroicons-outline:arrow-left hover:(h-8 w-8)" @click="handleRouterChange" />
   </div>
 </template>
 
@@ -13,7 +13,6 @@ import { $ref } from 'vue/macros'
 import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
 import { isDark, toggleDark } from '@/modules/dark'
-import { classNames } from '@/modules/utils'
 
 // title
 useHead({
@@ -22,16 +21,17 @@ useHead({
 
 // theme
 const isDarkValue = $ref(isDark)
-const themeClass = computed(() =>
-  classNames('cursor-pointer hover:(h-8 w-8)', isDarkValue ? 'heroicons-outline:moon' : 'heroicons-outline:sun'),
-)
+const themeClass = computed(() => (isDarkValue ? 'i-heroicons-outline:moon' : 'i-heroicons-outline:sun'))
+const handleThemeChange = () => toggleDark()
 
 // i18n
 const { t, locale } = useI18n()
-const name = computed(() => (locale.value === 'zh-CN' ? '世界' : 'World'))
-const toggleLocale = () => (locale.value === 'zh-CN' ? (locale.value = 'en') : (locale.value = 'zh-CN'))
+let localeValue = $ref(locale)
+const name = computed(() => (localeValue === 'zh-CN' ? '世界' : 'World'))
+const handleLocaleChange = () => (localeValue === 'zh-CN' ? (localeValue = 'en') : (localeValue = 'zh-CN'))
 watch(locale, (locale) => (localStorage.locale = locale))
 
 // router
 const router = useRouter()
+const handleRouterChange = () => router.push('/')
 </script>
