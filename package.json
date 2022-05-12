@@ -28,7 +28,7 @@
     "vite": "2.9.9",
     "vite-plugin-pages": "0.23.0",
     "vite-plugin-windicss": "1.8.4",
-    "vue-tsc": "0.34.12",
-    "windicss": "3.5.2"
+    "vue-tsc": "0.34.13",
+    "windicss": "3.5.3"
   }
 }
