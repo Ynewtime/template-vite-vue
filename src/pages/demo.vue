@@ -1,15 +1,16 @@
 <template>
   <div class="min-h-screen auto-cols-fr auto-rows-fr grid select-none place-items-center">
-    <div class="cursor-pointer hover:(h-8 w-8)" :class="themeClass" @click="handleThemeChange" />
-    <div class="cursor-pointer hover:text-xl" @click="handleLocaleChange">{{ t('hello', { name }) }}</div>
-    <div class="cursor-pointer i-heroicons-outline:arrow-left hover:(h-8 w-8)" @click="handleRouterChange" />
+    <div class="cursor-pointer demo-hover-larger" :class="themeClass" @click="handleThemeChange" />
+    <div class="cursor-pointer demo-hover-scale" @click="handleLocaleChange">
+      {{ t('hello', { name }) }}
+    </div>
+    <div class="cursor-pointer i-heroicons-outline:arrow-left demo-hover-larger" @click="handleRouterChange" />
   </div>
 </template>
 
 <script setup lang="ts">
 import { useI18n } from 'vue-i18n'
 import { watch, computed } from 'vue'
-import { $ref } from 'vue/macros'
 import { useHead } from '@vueuse/head'
 import { useRouter } from 'vue-router'
 import { isDark, toggleDark } from '@/modules/dark'
@@ -35,3 +36,12 @@ watch(locale, (locale) => (localStorage.locale = locale))
 const router = useRouter()
 const handleRouterChange = () => router.push('/')
 </script>
+
+<style>
+.demo-hover-scale {
+  @apply transition ease-in-out duration-300 hover:scale-150;
+}
+.demo-hover-larger {
+  @apply transition-all ease-in-out duration-300 hover:(w-12 h-12);
+}
+</style>
