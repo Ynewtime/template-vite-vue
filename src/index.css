@@ -1,3 +1,20 @@
+/* THEME */
+:root {
+  --bg: white;
+  --color: theme('colors.slate.800');
+  --tint: theme('colors.slate.50');
+  --border: theme('colors.slate.400');
+}
+
+html.dark,
+[data-theme='dark'] {
+  --bg: theme('colors.slate.800');
+  --color: theme('colors.slate.50');
+  --tint: theme('colors.slate.700');
+  --border: theme('colors.slate.300');
+}
+
+/* CUSTOM */
 * {
   scrollbar-color: auto;
   scrollbar-width: auto;
@@ -8,10 +25,10 @@
     @apply bg-transparent;
   }
   &::-webkit-scrollbar-thumb {
-    @apply rounded bg-slate-400 dark:bg-slate-300;
+    @apply bg-$border rounded;
   }
 }
 
 body {
-  @apply font-sans text-slate-800 dark:bg-slate-900 dark:text-white;
+  @apply theme-base;
 }
